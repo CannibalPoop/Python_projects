@@ -64,23 +64,27 @@ def hit(self, hand, name):
     print(name, ', '.join(hand))
 
 money = 1000
-d = Deck()
-h, dealer = [], []
-bet = int(input("Добро пожаловать в казино 'Гнездо'. На вашем балансе 1000 яиц. Делайте ваши ставки! "))
-give_cards(d, h, dealer)
-answer = input("Ваши действия? ")
-while answer == "h":
-    hit(d, h, "Ваши карты")
-    if sum_of_cards(h) > 21:
-        break
-    answer = input("Ваши действия? ")
-while sum_of_cards(dealer) < 16:
-    hit(d, dealer, "Карты дилера")
-print("Ваш счет: ", sum_of_cards(h), '\n', "Счет дилера: ", sum_of_cards(dealer))
-if (sum_of_cards(h) < 22 and sum_of_cards(h) > sum_of_cards(dealer)) or (sum_of_cards(h) < 22 and sum_of_cards(dealer) > 21):
-    print("Вы победили!")
-    money += bet
-else:
-    print("Удачи в следующий раз!")
-    money -= bet
-print("Ваш баланс: ", money)
+quest = input("Добро пожаловать в казино 'Гнездо'. На вашем балансе 1000 яиц. Хотите сыграть? (y/n) ")
+while quest == "y":
+    d = Deck()
+    h, dealer = [], []
+    bet = int(input("Делайте ваши ставки! "))
+    give_cards(d, h, dealer)
+    answer = input("Ваши действия? (h/s) ")
+    while answer == "h":
+        hit(d, h, "Ваши карты")
+        if sum_of_cards(h) > 21:
+            break
+        answer = input("Ваши действия? (h/s) ")
+    while sum_of_cards(dealer) < 16:
+        hit(d, dealer, "Карты дилера")
+    print("Ваш счет: ", sum_of_cards(h), '\n', "Счет дилера: ", sum_of_cards(dealer))
+    if (sum_of_cards(h) < 22 and sum_of_cards(h) > sum_of_cards(dealer)) or (sum_of_cards(h) < 22 and sum_of_cards(dealer) > 21):
+        print("Вы победили!")
+        money += bet
+    else:
+        print("Удачи в следующий раз!")
+        money -= bet
+    print("Ваш баланс: ", money)
+    quest = input("Хотите сыгать еще? (y/n) ")
+print("Спасибо за игру!")
