@@ -59,22 +59,23 @@ def give_cards(self, hand: list, dealer: list):
     print("Карты дилера: ", ''.join(dealer))
     self.draw_card_closed(dealer)
 
-def hit(self, hand):
+def hit(self, hand, name):
     self.draw_card_open(hand)
-    print(', '.join(hand))
+    print(name, ', '.join(hand))
 
 money = 1000
 d = Deck()
 h, dealer = [], []
-bet = 100
-    #money, int(input("Добро пожаловать в казино 'Гнездо'. На вашем балансе 1000 яиц. Делайте ваши ставки! ")))
+bet = int(input("Добро пожаловать в казино 'Гнездо'. На вашем балансе 1000 яиц. Делайте ваши ставки! "))
 give_cards(d, h, dealer)
-answer = input("Ваши действия?")
+answer = input("Ваши действия? ")
 while answer == "h":
-    hit(d, h)
-    answer = input("Ваши действия?")
+    hit(d, h, "Ваши карты")
+    if sum_of_cards(h) > 21:
+        break
+    answer = input("Ваши действия? ")
 while sum_of_cards(dealer) < 16:
-    hit(d, dealer)
+    hit(d, dealer, "Карты дилера")
 print("Ваш счет: ", sum_of_cards(h), '\n', "Счет дилера: ", sum_of_cards(dealer))
 if (sum_of_cards(h) < 22 and sum_of_cards(h) > sum_of_cards(dealer)) or (sum_of_cards(h) < 22 and sum_of_cards(dealer) > 21):
     print("Вы победили!")
