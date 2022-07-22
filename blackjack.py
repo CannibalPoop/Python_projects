@@ -66,6 +66,20 @@ def hit(self, hand, name):
     self.draw_card_open(hand)
     print(name, ', '.join(hand))
 
+def split(deck, hand: list):
+    if hand[0] == hand[1]:
+        hand1, hand2 = [], []
+        hand1.append(hand[0])
+        deck.draw_card_open(hand1)
+        hand2.append(hand[1])
+        deck.draw_card_open(hand2)
+        hand[0], hand[1] = hand1, hand2
+
+def double():
+    pass
+
+
+
 money = 1000
 quest = input("Добро пожаловать в казино 'Гнездо'. На вашем балансе 1000 яиц. Хотите сыграть? (y/n) ")
 while quest == "y":
